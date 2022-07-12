@@ -3,13 +3,13 @@ import { getLeads } from "./leads/leads";
 
 export const Bitrix24 = ({ apiKey }) => {
   if (!apiKey) {
-    throw new Error("The API Key was expected in Bitrix24-api library!");
+    throw new Error("The API Key is required");
   }
   if (typeof apiKey !== "string") {
-    throw new Error(`The API Key is a string not a ${typeof apiKey}`);
+    throw new Error(`The API Key is not a string. Is a a ${typeof apiKey}`);
   }
   if (apiKey.length !== 16) {
-    throw new Error(`The API expects 16 characteres`);
+    throw new Error(`The API Key needed to be 16 characteres`);
   }
   return {
     crm: {
@@ -18,4 +18,3 @@ export const Bitrix24 = ({ apiKey }) => {
     },
   };
 };
-
