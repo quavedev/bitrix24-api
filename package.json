@@ -1,23 +1,48 @@
 {
-  "name": "bitrix24-api",
+  "name": "@quavedev/bitrix24-api",
   "version": "1.1.0",
   "description": "An API to work with Bitrix24",
-  "main": "src/main.js",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "files": [
+    "dist/index.js",
+    "dist/index.es.js"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
+  },
   "scripts": {
     "dev": "nodemon --exec babel-node ./src/main.js",
-    "test": "jest"
+    "test": "jest",
+    "build-lib": "rollup -c",
+    "publish-lib": "npm run build-lib && npm publish"
   },
   "author": "Fernando Lima",
-  "license": "MIT",
-  "dependencies": {
+  "license": "private",
+  "dependencies": {},
+  "devDependencies": {
     "@babel/core": "^7.16.7",
     "@babel/node": "^7.16.8",
     "@babel/preset-env": "^7.16.8",
+    "@quave/eslint-config-quave": "^1.0.7",
+    "@rollup/plugin-commonjs": "^22.0.1",
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "axios": "^0.24.0",
+    "jest": "^28.1.2",
+    "nodemon": "^2.0.19",
+    "prettier": "^2.7.1",
+    "rollup": "^2.76.0",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-terser": "^7.0.2"
+  },
+  "peerDependencies": {
     "axios": "^0.24.0"
   },
-  "devDependencies": {
-    "nodemon": "^2.0.19",
-    "jest": "^28.1.2",
-    "prettier": "^2.7.1"
+  "eslintConfig": {
+    "extends": [
+      "@quave/quave"
+    ]
   }
 }

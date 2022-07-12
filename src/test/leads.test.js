@@ -1,7 +1,9 @@
 import { Bitrix24 } from "../main";
 
+const endpoint = process.env.API_ENDPOINT || "";
+
 test("Should create a lead", async () => {
-  const bitrix24 = Bitrix24({ apiKey: "" });
+  const bitrix24 = Bitrix24({ endpoint });
 
   const names = [
     "Tamara",
@@ -46,12 +48,12 @@ test("Should create a lead", async () => {
 });
 
 test("Should get a lead", async () => {
-  const bitrix24 = Bitrix24({ apiKey: "" });
+  const bitrix24 = Bitrix24({ endpoint });
 
   let response = {};
 
   try {
-    response = await bitrix24.crm.leads.getLeads({ id: 4 });
+    response = await bitrix24.crm.leads.getLeads({ id: 1 });
     console.log("response: ", response);
   } catch (error) {
     console.error(error);
@@ -61,13 +63,13 @@ test("Should get a lead", async () => {
 });
 
 test.only("Should update a lead", async () => {
-  const bitrix24 = Bitrix24({ apiKey: "" });
+  const bitrix24 = Bitrix24({ endpoint });
 
   let response = {};
 
   try {
     response = await bitrix24.crm.leads.updateLead({
-      id: 4,
+      id: 1,
       title: "Lead atualizado.",
     });
     console.log("response: ", response);

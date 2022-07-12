@@ -1,20 +1,20 @@
 import { getDeals } from "./deals/deals";
 import { getLeads } from "./leads/leads";
 
-export const Bitrix24 = ({ apiKey }) => {
-  if (!apiKey) {
-    throw new Error("The API Key is required");
+export const Bitrix24 = ({ endpoint: _endpoint }) => {
+  if (!_endpoint) {
+    throw new Error("The endpoint is required");
   }
-  if (typeof apiKey !== "string") {
-    throw new Error(`The API Key is not a string. Is a a ${typeof apiKey}`);
+  if (typeof _endpoint !== "string") {
+    throw new Error(`The endpoint is not a string. Is a a ${typeof _endpoint}`);
   }
-  if (apiKey.length !== 16) {
-    throw new Error(`The API Key needed to be 16 characteres`);
-  }
+  const endpoint = _endpoint.endsWith("/")
+    ? _endpoint.substring(0, _endpoint.length - 1)
+    : _endpoint;
   return {
     crm: {
-      deals: getDeals(apiKey),
-      leads: getLeads(apiKey),
+      deals: getDeals(endpoint),
+      leads: getLeads(endpoint),
     },
   };
 };
