@@ -1,0 +1,22 @@
+{
+  "name": "bitrix24-api",
+  "version": "1.1.0",
+  "description": "An API to work with Bitrix24",
+  "main": "src/main.js",
+  "scripts": {
+    "dev": "nodemon --exec babel-node ./src/main.js",
+    "build": "",
+    "test": "jest"
+  },
+  "author": "Fernando Lima",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/core": "^7.16.7",
+    "@babel/node": "^7.16.8",
+    "@babel/preset-env": "^7.16.8",
+    "axios": "^0.24.0",
+    "jest": "^28.1.2",
+    "nodemon": "^2.0.19",
+    "prettier": "^2.7.1"
+  }
+}
