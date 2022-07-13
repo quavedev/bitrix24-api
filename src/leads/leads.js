@@ -4,11 +4,12 @@ const getPath = (method) => `crm.lead.${method}`;
 
 export const getLeads = (endpoint) => {
   return {
-    createLead(body) {
+    createLead({ fields, params }) {
       const api = new API({ endpoint, path: getPath("add.json") });
       return api.call({
         body: {
-          fields: body,
+          fields,
+          ...(params ? params : {}),
         },
       });
     },
@@ -32,17 +33,16 @@ export const getLeads = (endpoint) => {
       const api = new API({ endpoint, path: getPath("productrows.get.json") });
       return api.call({ body });
     },
-    createOrUpdateLeadProduct(body) {
+    createOrUpdateLeadProduct({ id, rows = [] }) {
       const api = new API({ endpoint, path: getPath("productrows.set.json") });
-      return api.call({ body });
+      return api.call({ body: { id, rows } });
     },
-    updateLead(body) {
+    updateLead({ id, fields }) {
       const api = new API({ endpoint, path: getPath("update.json") });
-      const { id } = body;
       return api.call({
         body: {
           id,
-          fields: body,
+          fields,
         },
       });
     },
