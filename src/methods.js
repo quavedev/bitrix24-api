@@ -241,10 +241,40 @@ const API_TASKS_METHODS = [
   },
 ];
 
+const API_USERS_METHODS = [
+  {
+    context: "user",
+    path: "user.",
+    methods: [
+      { name: "getCurrent", method: "current.json" },
+      { name: "invite", method: "add.json" },
+      { name: "update", method: "update.json" },
+      { name: "search", method: "search.json" },
+    ],
+  },
+];
+
+const API_CALENDAR_METHODS = [
+  {
+    context: "calendar",
+    path: "calendar.",
+    methods: [
+      { name: "availableUsers", method: "accessibility.get.json" },
+      { name: "createEvent", method: "event.add.json" },
+      { name: "deleteCalendarEvent", method: "event.delete.json" },
+      { name: "getCalendarEvents", method: "event.get.json" },
+      { name: "getFutureCalendarEvents", method: "event.get.nearest.json" },
+      { name: "getCalendarEventById", method: "event.getbyid.json" },
+      { name: "updateCalendarEvent", method: "event.update.json" },
+    ],
+  },
+];
 const API_METHODS = {
   crm: API_CRM_METHODS,
   drive: API_DRIVE_METHODS,
   tasks: API_TASKS_METHODS,
+  user: API_USERS_METHODS,
+  calendar: API_CALENDAR_METHODS,
 };
 
 export const getAPIMethods = ({ endpoint }) =>
