@@ -2,14 +2,14 @@ export interface Config {
   endpoint: string;
 }
 
-export interface GenericObject {
-  [key: string]: Object;
+export interface GenericObject<T = any> {
+  [key: string]: T;
 }
 
 export interface CallProps {
   body?: GenericObject;
   method?: "POST" | "GET";
-  headers?: { [key: string]: string };
+  headers?: GenericObject<string>;
 }
 
 export interface CrudListCallProps {
@@ -28,12 +28,12 @@ export interface APIType {
   call(path: string, params?: CallProps): Promise<any>;
 }
 
-export type methodAdd = (fields: Object) => Promise<Object>;
-export type methodDelete = (id: string) => Promise<Object>;
-export type methodFields = () => Promise<Object>;
-export type methodGet = (id: string) => Promise<Object>;
-export type methodList = (options: CrudListCallProps) => Promise<Object>;
-export type methodUpdate = (options: CrudUpdateCallProps) => Promise<Object>;
+export type methodAdd = (fields: GenericObject) => Promise<GenericObject>;
+export type methodDelete = (id: string) => Promise<GenericObject>;
+export type methodFields = () => Promise<GenericObject>;
+export type methodGet = (id: string) => Promise<GenericObject>;
+export type methodList = (options: CrudListCallProps) => Promise<GenericObject>;
+export type methodUpdate = (options: CrudUpdateCallProps) => Promise<GenericObject>;
 
 export interface CrudDefaultMethodsType {
   add: methodAdd;
