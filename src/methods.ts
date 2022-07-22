@@ -298,17 +298,18 @@ type Entries<T> = {
   [K in keyof T]: [K, T[K]];
 }[keyof T][];
 
-export const getAPIMethods = ({ endpoint }) =>
-  (Object.entries(API_METHODS) as Entries<typeof API_METHODS>).reduce(
-    (acc, [key, value]) => ({
-      ...acc,
-      [key]: value.reduce(
-        (acc, { path, context, methods }) => ({
-          ...acc,
-          [context]: generateAPIMethods({ path, methods, endpoint }),
-        }),
-        {}
-      ),
-    }),
-    {}
-  );
+// // @ts-ignore
+// export const getAPIMethods = ({ endpoint }) =>
+//   (Object.entries(API_METHODS) as Entries<typeof API_METHODS>).reduce(
+//     (acc, [key, value]) => ({
+//       ...acc,
+//       [key]: value.reduce(
+//         (acc, { path, context, methods }) => ({
+//           ...acc,
+//           [context]: generateAPIMethods({ path, methods, endpoint }),
+//         }),
+//         {}
+//       ),
+//     }),
+//     {}
+//   );
