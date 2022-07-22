@@ -29,7 +29,7 @@ export default [
       resolve({
         extensions: [".js", ".ts"],
       }),
-      terser(),
+      // terser(),
     ],
   },
 ];

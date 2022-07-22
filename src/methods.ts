@@ -1,6 +1,19 @@
 import { generateAPIMethods } from "./utils";
 
-const API_CRM_METHODS = [
+type ApiCrmMethodContexts = "deal" | "lead" | "category" | "status" | "contact" | "product" | "activity" | "timeline" | "settings" | string;
+
+type Method = {
+  name: string,
+  method: string
+}
+
+type ApiCrmMethodType = {
+  context: ApiCrmMethodContexts,
+  path: `crm.${ApiCrmMethodContexts}.`
+  methods: Method[]
+}
+
+const API_CRM_METHODS: ApiCrmMethodType[] = [
   {
     context: "deal",
     path: "crm.deal.",
@@ -132,7 +145,7 @@ const API_CRM_METHODS = [
   },
   {
     context: "settings",
-    path: "crm.settings",
+    path: "crm.settings.",
     methods: [
       { name: "getById", method: "add.json" },
       { name: "getFields", method: "get.json" },
@@ -269,6 +282,9 @@ const API_CALENDAR_METHODS = [
     ],
   },
 ];
+
+
+
 const API_METHODS = {
   crm: API_CRM_METHODS,
   drive: API_DRIVE_METHODS,
@@ -277,8 +293,13 @@ const API_METHODS = {
   calendar: API_CALENDAR_METHODS,
 };
 
+
+type Entries<T> = {
+  [K in keyof T]: [K, T[K]];
+}[keyof T][];
+
 export const getAPIMethods = ({ endpoint }) =>
-  Object.entries(API_METHODS).reduce(
+  (Object.entries(API_METHODS) as Entries<typeof API_METHODS>).reduce(
     (acc, [key, value]) => ({
       ...acc,
       [key]: value.reduce(
