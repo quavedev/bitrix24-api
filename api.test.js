@@ -1,6 +1,12 @@
 import { LeadAPI } from "./dist/es/crm/leads";
+import { ProductAPI } from "./dist/es/crm/products";
+import { DealAPI } from "./dist/es/crm/deals";
+
+const config = { endpoint: "test" };
 
 describe("test ", function () {
-  LeadAPI({ endpoint: "test" }).get("12");
-  LeadAPI({ endpoint: "test" }).add({ ab: "acc" });
+  DealAPI(config);
+  LeadAPI(config).;
+  LeadAPI(config).add({ ab: "acc" });
+  ProductAPI(config);
 });

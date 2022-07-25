@@ -28,18 +28,20 @@ export interface APIType {
   call(path: string, params?: CallProps): Promise<any>;
 }
 
-export type methodAdd = (fields: GenericObject) => Promise<GenericObject>;
-export type methodDelete = (id: string) => Promise<GenericObject>;
-export type methodFields = () => Promise<GenericObject>;
-export type methodGet = (id: string) => Promise<GenericObject>;
-export type methodList = (options: CrudListCallProps) => Promise<GenericObject>;
-export type methodUpdate = (options: CrudUpdateCallProps) => Promise<GenericObject>;
+export interface MethodsBuilder {
+  [key: string]: {
+    key: string;
+    callBuilder: (path: string) => (...params: any) => Promise<GenericObject>;
+  };
+}
+
+export type MethodBuilder = (api: APIType) => MethodsBuilder;
 
 export interface CrudDefaultMethodsType {
-  add: methodAdd;
-  fields: methodFields;
-  delete: methodDelete;
-  get: methodGet;
-  list: methodList;
-  update: methodUpdate;
+  add(fields: GenericObject): Promise<GenericObject>;
+  fields(): Promise<GenericObject>;
+  delete(id: string): Promise<GenericObject>;
+  get(id: string): Promise<GenericObject>;
+  list(options: CrudListCallProps): Promise<GenericObject>;
+  update(options: CrudUpdateCallProps): Promise<GenericObject>;
 }

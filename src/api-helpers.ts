@@ -1,6 +1,15 @@
-import { APIType, CrudListCallProps, CrudUpdateCallProps, GenericObject } from "./api.types";
+import {
+  APIType,
+  Config,
+  CrudListCallProps,
+  CrudUpdateCallProps,
+  GenericObject,
+  MethodBuilder,
+  MethodsBuilder,
+} from "./api.types";
+import { API } from "./api";
 
-export const CRUD_METHODS = (api: APIType) => ({
+export const CRUD_METHODS: MethodBuilder = (api: APIType): MethodsBuilder => ({
   add: {
     key: "add",
     callBuilder:
@@ -42,3 +51,18 @@ export const CRUD_METHODS = (api: APIType) => ({
   },
 });
 
+export const buildApiMethods: any = (
+  config: Config,
+  methodPrefix: string,
+  methodBuild: MethodBuilder
+): APIType => {
+  const api = new API(config);
+  const entries = Object.entries(methodBuild(api));
+  return entries.reduce(
+    (acc, [method, { key, callBuilder }]) => ({
+      ...acc,
+      [method]: callBuilder(`${methodPrefix}.${key}`),
+    }),
+    {} as APIType
+  );
+};
