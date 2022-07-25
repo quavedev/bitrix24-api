@@ -1,9 +1,4 @@
-import {
-  APIType,
-  CrudDefaultMethodsType,
-  GenericObject,
-} from "../../api.types";
-import { CRUD_METHODS } from "../../api-helpers";
+import { APIType, GenericObject } from "../../api.types";
 
 export interface ProductSharedMethodApiType {
   productRowsGet(id: string): Promise<Object>;
