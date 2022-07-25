@@ -1,55 +1,45 @@
+import { API } from "./api";
 import {
   APIType,
   Config,
-  CrudListCallProps,
-  CrudUpdateCallProps,
   GenericObject,
   MethodBuilder,
   MethodsBuilder,
 } from "./api.types";
-import { API } from "./api";
 
-export const CRUD_METHODS: MethodBuilder = (api: APIType): MethodsBuilder => ({
-  add: {
-    key: "add",
-    callBuilder:
-      (path: string) =>
-      (fields: GenericObject): Promise<GenericObject> =>
-        api.call(path, { body: { fields } }),
-  },
-  delete: {
-    key: "delete",
-    callBuilder:
-      (path: string) =>
-      (id: string): Promise<GenericObject> =>
-        api.call(path, { body: { id } }),
-  },
-  fields: {
-    key: "fields",
-    callBuilder: (path: string) => (): Promise<GenericObject> => api.call(path),
-  },
-  get: {
-    key: "get",
-    callBuilder:
-      (path: string) =>
-      (id: string): Promise<GenericObject> =>
-        api.call(path, { body: { id } }),
-  },
-  list: {
-    key: "list",
-    callBuilder:
-      (path: string) =>
-      (options: CrudListCallProps): Promise<GenericObject> =>
-        api.call(path, { body: { ...options } }),
-  },
-  update: {
-    key: "update",
-    callBuilder:
-      (path: string) =>
-      (options: CrudUpdateCallProps): Promise<GenericObject> =>
-        api.call(path, { body: { ...options } }),
-  },
-});
+export const CRUD_METHODS: MethodBuilder = (api: APIType): MethodsBuilder => {
+  const callBuilder =
+    (path: string) =>
+    (...params: any): Promise<GenericObject> =>
+      api.call(path, { body: { ...params } });
+
+  return {
+    add: {
+      key: "add",
+      callBuilder,
+    },
+    delete: {
+      key: "delete",
+      callBuilder,
+    },
+    fields: {
+      key: "fields",
+      callBuilder,
+    },
+    get: {
+      key: "get",
+      callBuilder,
+    },
+    list: {
+      key: "list",
+      callBuilder,
+    },
+    update: {
+      key: "update",
+      callBuilder,
+    },
+  };
+};
 
 export const buildApiMethods: any = (
   config: Config,
