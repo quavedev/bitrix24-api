@@ -1,6 +1,6 @@
 // @ts-ignore
 import { checkFieldsInputParams, checkGetInputParams } from "./testHelpers";
-import { DealAPI } from "../dist/cjs";
+import { DealAPI } from "../dist/crm";
 
 const config = { endpoint: "http://localhost:5080" };
 

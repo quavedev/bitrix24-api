@@ -2,25 +2,22 @@
   "name": "@quavedev/bitrix24-api",
   "version": "1.1.0",
   "description": "An API to work with Bitrix24",
-  "main": "dist/cjs/index.js",
-  "module": "dist/es/index.js",
-  "types": "dist/es/index.js",
-  "files": [
-    "dist"
-  ],
+  "main": "./index.js",
+  "types": "./types/index.d.ts",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com",
     "access": "restricted"
   },
   "scripts": {
-    "build": "npm run build:clean && npm run build:cjs && npm run build:esm && npm run build:types",
+    "build": "npm run build:clean && npm run build:cjs && npm run build:types",
     "test": "jest",
     "build-test": "npm run build && npm run test",
     "build:clean": "rm -rf dist",
-    "build:cjs": "rm -rf dist/cjs && tsc -p config/tsconfig.cjs.json",
-    "build:esm": "rm -rf dist/esm && tsc -p config/tsconfig.esm.json",
+    "build:cjs": "npm run build:clean && tsc -p config/tsconfig.cjs.json",
     "build:types": "rm -rf dist/types && tsc -p config/tsconfig.types.json",
-    "publish-lib": "npm run build-test && npm publish"
+    "publish:pre-cp": "cp package.json README.md ./dist/",
+    "publish:lib": "npm run build-test && npm run publish:pre-cp && npm publish ./dist",
+    "postpub": "ls ./dist"
   },
   "author": "Fernando Lima",
   "license": "private",
