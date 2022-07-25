@@ -13,13 +13,14 @@
     "access": "restricted"
   },
   "scripts": {
+    "build": "npm run build:clean && npm run build:cjs && npm run build:esm && npm run build:types",
     "test": "jest",
-    "publish-lib": "npm run build && npm publish",
-    "build": "npm run build:clean && npm run build:cjs && npm run build:es && npm run build:types",
+    "build-test": "npm run build && npm run test",
     "build:clean": "rm -rf dist",
     "build:cjs": "rm -rf dist/cjs && tsc -p config/tsconfig.cjs.json",
-    "build:es": "rm -rf dist/es && tsc -p config/tsconfig.es.json",
-    "build:types": "rm -rf dist/types && tsc -p config/tsconfig.types.json"
+    "build:esm": "rm -rf dist/esm && tsc -p config/tsconfig.esm.json",
+    "build:types": "rm -rf dist/types && tsc -p config/tsconfig.types.json",
+    "publish-lib": "npm run build-test && npm publish"
   },
   "author": "Fernando Lima",
   "license": "private",
@@ -31,6 +32,7 @@
     "axios": "^0.24.0",
     "jest": "^28.1.3",
     "prettier": "^2.7.1",
+    "ts-jest": "^28.0.7",
     "typescript": "^4.7.4"
   },
   "peerDependencies": {

@@ -1,5 +1,6 @@
 export interface Config {
   endpoint: string;
+  type?: "json" | "xml" | string;
 }
 
 export interface GenericObject<T = any> {
