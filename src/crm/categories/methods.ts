@@ -7,36 +7,35 @@ import {
 
 export const CATEGORY_METHODS: MethodBuilder = (
   api: APIType
-): MethodsBuilder => ({
-  add: {
-    key: "add",
-    callBuilder:
-      (path: string) =>
-      (entityTypeId: number, fields: GenericObject): Promise<GenericObject> =>
-        api.call(path, { body: { fields } }),
-  },
-  delete: {
-    key: "delete",
-    callBuilder: (path) => (entityTypeId: number, id) =>
-      api.call(path, { body: { id } }),
-  },
-  fields: {
-    key: "fields",
-    callBuilder: (path) => () => api.call(path),
-  },
-  get: {
-    key: "get",
-    callBuilder: (path) => (entityTypeId: number, id) =>
-      api.call(path, { body: { id } }),
-  },
-  list: {
-    key: "list",
-    callBuilder: (path) => (entityTypeId: number, options) =>
-      api.call(path, { body: Object.assign({}, { ...options, entityTypeId }) }),
-  },
-  update: {
-    key: "update",
-    callBuilder: (path) => (entityTypeId: number, options) =>
-      api.call(path, { body: Object.assign({}, { ...options, entityTypeId }) }),
-  },
-});
+): MethodsBuilder => {
+  const callBuilder =
+    (path: string) =>
+    (entityTypeId: number, fields: GenericObject): Promise<GenericObject> =>
+      api.call(path, { body: { fields } });
+  return {
+    add: {
+      key: "add",
+      callBuilder,
+    },
+    delete: {
+      key: "delete",
+      callBuilder,
+    },
+    fields: {
+      key: "fields",
+      callBuilder,
+    },
+    get: {
+      key: "get",
+      callBuilder,
+    },
+    list: {
+      key: "list",
+      callBuilder,
+    },
+    update: {
+      key: "update",
+      callBuilder,
+    },
+  };
+};
