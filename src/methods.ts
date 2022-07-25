@@ -1,4 +1,5 @@
-import { generateAPIMethods } from "./utils";
+
+//TODO Remover após passar para novo formato TS
 
 type ApiCrmMethodContexts = "deal" | "lead" | "category" | "status" | "contact" | "product" | "activity" | "timeline" | "settings" | string;
 

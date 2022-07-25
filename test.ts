@@ -1,5 +1,12 @@
-import {Bitrix24} from './src/main'
+import { LeadAPI } from "./dist/es/crm/leads";
+import { ProductAPI } from "./dist/es/crm/products";
+import { DealAPI } from "./dist/es/crm/deals";
 
+const config = { endpoint: "test" };
 
-const btx = Bitrix24({endpoint: "test"})
-
+describe("test ", function () {
+  DealAPI(config);
+  LeadAPI(config);
+  LeadAPI(config).add({ ab: "acc" });
+  ProductAPI(config);
+});
