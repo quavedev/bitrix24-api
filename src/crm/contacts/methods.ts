@@ -1,10 +1,10 @@
+import { CRUD_METHODS } from "../../api-helpers";
 import {
   APIType,
   GenericObject,
   MethodBuilder,
   MethodsBuilder,
 } from "../../api.types";
-import { CRUD_METHODS } from "../../api-helpers";
 
 const COMPANY_METHODS = (api: APIType) => ({
   companyAdd: {

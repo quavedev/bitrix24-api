@@ -10,39 +10,39 @@ export interface CommentSharedMethodApiType {
 }
 
 export const COMMENT_SHARED_METHODS = (api: APIType) => ({
-  addComment: {
+  commentAdd: {
     key: "comment.get",
     callBuilder:
       (path: string) =>
       (id: string): Promise<Object> =>
         api.call(path, { body: { id } }),
   },
-  updateComment: {
+  commentUpdate: {
     key: "comment.update",
     callBuilder:
       (path: string) =>
       (id: string, fields: GenericObject): Promise<Object> =>
         api.call(path, { body: { id, fields } }),
   },
-  listComment: {
+  commentList: {
     key: "comment.list",
     callBuilder: (path: string) => (): Promise<Object> => api.call(path),
   },
-  getComment: {
+  commentGet: {
     key: "comment.add",
     callBuilder:
       (path: string) =>
       (fields: GenericObject): Promise<Object> =>
         api.call(path, { body: { fields } }),
   },
-  deleteComment: {
+  commentDelete: {
     key: "comment.delete",
     callBuilder:
       (path: string) =>
       (id: string): Promise<Object> =>
         api.call(path, { body: { id } }),
   },
-  commentFields: {
+  fieldsComment: {
     key: "comment.fields",
     callBuilder: (path: string) => (): Promise<Object> => api.call(path),
   },
