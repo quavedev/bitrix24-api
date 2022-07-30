@@ -6,54 +6,54 @@ const PROPERTY_METHODS = (api: APIType) => ({
     key: "property.add",
     callBuilder:
       (path: string) =>
-      (fields: GenericObject): Promise<Object> =>
+      (fields: GenericObject): Promise<object> =>
         api.call(path, { body: { fields } }),
   },
   propertyDelete: {
     key: "property.delete",
     callBuilder:
       (path: string) =>
-      (id: string): Promise<Object> =>
+      (id: string): Promise<object> =>
         api.call(path, { body: { id } }),
   },
   propertyEnumerationFields: {
     key: "property.enumeration.fields",
-    callBuilder: (path: string) => (): Promise<Object> => api.call(path),
+    callBuilder: (path: string) => (): Promise<object> => api.call(path),
   },
   propertyFields: {
     key: "property.fields",
-    callBuilder: (path: string) => (): Promise<Object> => api.call(path),
+    callBuilder: (path: string) => (): Promise<object> => api.call(path),
   },
   propertyGet: {
     key: "property.Get",
     callBuilder:
       (path: string) =>
-      (id: string): Promise<Object> =>
+      (id: string): Promise<object> =>
         api.call(path, { body: { id } }),
   },
   propertyList: {
     key: "property.list",
     callBuilder:
       (path: string) =>
-      (order: GenericObject, filter: GenericObject): Promise<Object> =>
+      (order: GenericObject, filter: GenericObject): Promise<object> =>
         api.call(path, { body: { order, filter } }),
   },
   propertySettingsFields: {
     key: "property.settings.fields",
     callBuilder:
       (path: string) =>
-      (propertyType: string, userType: string): Promise<Object> =>
+      (propertyType: string, userType: string): Promise<object> =>
         api.call(path, { body: { propertyType, userType } }),
   },
   propertyTypes: {
     key: "property.types",
-    callBuilder: (path: string) => (): Promise<Object> => api.call(path),
+    callBuilder: (path: string) => (): Promise<object> => api.call(path),
   },
   propertyUpdate: {
     key: "property.update",
     callBuilder:
       (path: string) =>
-      (id: string, fields: GenericObject): Promise<Object> =>
+      (id: string, fields: GenericObject): Promise<object> =>
         api.call(path, { body: { id, fields } }),
   },
 });

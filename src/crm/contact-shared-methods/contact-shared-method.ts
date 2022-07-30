@@ -1,18 +1,18 @@
 import { APIType, GenericObject } from "../../api.types";
 
 export interface ContactSharedMethodApiType {
-  contactAdd(id: string, fields: GenericObject): Promise<Object>;
-  contactDelete(id: string, fields: GenericObject): Promise<Object>;
-  contactFields(): Promise<Object>;
-  getItemsContact(id: string): Promise<Object>;
-  deleteItemsContact(id: string): Promise<Object>;
-  setItemsContact(id: string, items: GenericObject): Promise<Object>;
+  contactAdd(id: string, fields: GenericObject): Promise<object>;
+  contactDelete(id: string, fields: GenericObject): Promise<object>;
+  contactFields(): Promise<object>;
+  getItemsContact(id: string): Promise<object>;
+  deleteItemsContact(id: string): Promise<object>;
+  setItemsContact(id: string, items: GenericObject): Promise<object>;
 }
 
 export const CONTACT_SHARED_METHODS = (api: APIType) => {
   const callBuilder =
     (path: string) =>
-    (...params: any): Promise<Object> =>
+    (...params: any): Promise<object> =>
       api.call(path, { body: { ...params } });
 
   return {

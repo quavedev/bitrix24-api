@@ -11,14 +11,14 @@ const COMPANY_METHODS = (api: APIType) => ({
     key: "company.add",
     callBuilder:
       (path: string) =>
-      (id: string, fields: GenericObject): Promise<Object> =>
+      (id: string, fields: GenericObject): Promise<object> =>
         api.call(path, { body: { id, fields } }),
   },
   companyDelete: {
     key: "company.delete",
     callBuilder:
       (path: string) =>
-      (id: string, fields: GenericObject): Promise<Object> =>
+      (id: string, fields: GenericObject): Promise<object> =>
         api.call(path, { body: { id, fields } }),
   },
 });

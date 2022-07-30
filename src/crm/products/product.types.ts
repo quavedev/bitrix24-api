@@ -1,18 +1,18 @@
 import { CrudDefaultMethodsType, GenericObject } from "../../api.types";
 
 interface ProductPropertyApiType {
-  propertyAdd: (fields: GenericObject) => Promise<Object>;
-  propertyDelete(id: string): Promise<Object>;
-  propertyEnumerationFields(): Promise<Object>;
-  propertyFields(): Promise<Object>;
-  propertyGet(id: string): Promise<Object>;
-  propertyList(order: GenericObject, filter: GenericObject): Promise<Object>;
+  propertyAdd: (fields: GenericObject) => Promise<object>;
+  propertyDelete(id: string): Promise<object>;
+  propertyEnumerationFields(): Promise<object>;
+  propertyFields(): Promise<object>;
+  propertyGet(id: string): Promise<object>;
+  propertyList(order: GenericObject, filter: GenericObject): Promise<object>;
   propertySettingsFields(
     propertyType: string,
     userType: string
-  ): Promise<Object>;
-  propertyTypes(): Promise<Object>;
-  propertyUpdate(id: string, fields: GenericObject): Promise<Object>;
+  ): Promise<object>;
+  propertyTypes(): Promise<object>;
+  propertyUpdate(id: string, fields: GenericObject): Promise<object>;
 }
 
 export interface ProductApiType
