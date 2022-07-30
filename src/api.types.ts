@@ -20,7 +20,7 @@ export interface CrudListCallProps {
 }
 
 export interface CrudUpdateCallProps {
-  id: string;
+  id: number;
   fields: GenericObject;
   params?: GenericObject;
 }
@@ -29,14 +29,29 @@ export interface APIType {
   call(path: string, params?: CallProps): Promise<any>;
 }
 
+export interface MethodsDefBuilder {
+  [
+    key:
+      | "add"
+      | "delete"
+      | "fields"
+      | "get"
+      | "list"
+      | "update"
+      | "noParams"
+      | "withFieldsParam"
+      | string
+  ]: (api: APIType, path: string) => (...params: any) => Promise<GenericObject>;
+}
 export interface MethodsBuilder {
   [key: string]: {
     key: string;
-    callBuilder: (path: string) => (...params: any) => Promise<GenericObject>;
+    callBuilder: (
+      api: APIType,
+      path: string
+    ) => (...params: any) => Promise<GenericObject>;
   };
 }
-
-export type MethodBuilder = (api: APIType) => MethodsBuilder;
 
 export interface CrudDefaultMethodsType {
   add(fields: GenericObject): Promise<GenericObject>;

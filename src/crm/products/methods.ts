@@ -1,64 +1,67 @@
-import { APIType, GenericObject } from "../../api.types";
+import { APIType, GenericObject, MethodsBuilder } from "../../api.types";
 import { CRUD_METHODS } from "../../api-helpers";
 
-const PROPERTY_METHODS = (api: APIType) => ({
+const PROPERTY_METHODS: MethodsBuilder = {
   propertyAdd: {
     key: "property.add",
     callBuilder:
-      (path: string) =>
+      (api: APIType, path: string) =>
       (fields: GenericObject): Promise<object> =>
         api.call(path, { body: { fields } }),
   },
   propertyDelete: {
     key: "property.delete",
     callBuilder:
-      (path: string) =>
+      (api: APIType, path: string) =>
       (id: string): Promise<object> =>
         api.call(path, { body: { id } }),
   },
   propertyEnumerationFields: {
     key: "property.enumeration.fields",
-    callBuilder: (path: string) => (): Promise<object> => api.call(path),
+    callBuilder: (api: APIType, path: string) => (): Promise<object> =>
+      api.call(path),
   },
   propertyFields: {
     key: "property.fields",
-    callBuilder: (path: string) => (): Promise<object> => api.call(path),
+    callBuilder: (api: APIType, path: string) => (): Promise<object> =>
+      api.call(path),
   },
   propertyGet: {
     key: "property.Get",
     callBuilder:
-      (path: string) =>
+      (api: APIType, path: string) =>
       (id: string): Promise<object> =>
         api.call(path, { body: { id } }),
   },
   propertyList: {
     key: "property.list",
     callBuilder:
-      (path: string) =>
+      (api: APIType, path: string) =>
       (order: GenericObject, filter: GenericObject): Promise<object> =>
         api.call(path, { body: { order, filter } }),
   },
   propertySettingsFields: {
     key: "property.settings.fields",
     callBuilder:
-      (path: string) =>
+      (api: APIType, path: string) =>
       (propertyType: string, userType: string): Promise<object> =>
         api.call(path, { body: { propertyType, userType } }),
   },
   propertyTypes: {
     key: "property.types",
-    callBuilder: (path: string) => (): Promise<object> => api.call(path),
+    callBuilder: (api: APIType, path: string) => (): Promise<object> =>
+      api.call(path),
   },
   propertyUpdate: {
     key: "property.update",
     callBuilder:
-      (path: string) =>
+      (api: APIType, path: string) =>
       (id: string, fields: GenericObject): Promise<object> =>
         api.call(path, { body: { id, fields } }),
   },
-});
+};
 
-export const PRODUCT_METHODS = (api: APIType) => ({
-  ...CRUD_METHODS(api),
-  ...PROPERTY_METHODS(api),
-});
+export const PRODUCT_METHODS: MethodsBuilder = {
+  ...CRUD_METHODS,
+  ...PROPERTY_METHODS,
+};

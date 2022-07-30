@@ -1,4 +1,4 @@
-import { APIType, GenericObject } from "../../api.types";
+import { APIType, GenericObject, MethodsBuilder } from "../../api.types";
 
 export interface ContactSharedMethodApiType {
   contactAdd(id: string, fields: GenericObject): Promise<object>;
@@ -9,36 +9,45 @@ export interface ContactSharedMethodApiType {
   setItemsContact(id: string, items: GenericObject): Promise<object>;
 }
 
-export const CONTACT_SHARED_METHODS = (api: APIType) => {
-  const callBuilder =
-    (path: string) =>
-    (...params: any): Promise<object> =>
-      api.call(path, { body: { ...params } });
-
-  return {
-    contactAdd: {
-      key: "contact.add",
-      callBuilder,
-    },
-    contactDelete: {
-      key: "contact.delete",
-      callBuilder,
-    },
-    contactFields: {
-      key: "contact.fields",
-      callBuilder,
-    },
-    getItemsContact: {
-      key: "contact.items.fields",
-      callBuilder,
-    },
-    deleteItemsContact: {
-      key: "contact.items.delete",
-      callBuilder,
-    },
-    setItemsContact: {
-      key: "contact.items.set",
-      callBuilder,
-    },
-  };
+export const CONTACT_SHARED_METHODS: MethodsBuilder = {
+  contactAdd: {
+    key: "contact.add",
+    callBuilder:
+      (api: APIType, path: string) =>
+      (id: string, fields: GenericObject): Promise<object> =>
+        api.call(path, { body: { id, fields } }),
+  },
+  contactDelete: {
+    key: "contact.delete",
+    callBuilder:
+      (api: APIType, path: string) =>
+      (id: string, fields: GenericObject): Promise<object> =>
+        api.call(path, { body: { id, fields } }),
+  },
+  contactFields: {
+    key: "contact.fields",
+    callBuilder: (api: APIType, path: string) => (): Promise<object> =>
+      api.call(path),
+  },
+  getItemsContact: {
+    key: "contact.items.fields",
+    callBuilder:
+      (api: APIType, path: string) =>
+      (id: string): Promise<object> =>
+        api.call(path, { body: { id } }),
+  },
+  deleteItemsContact: {
+    key: "contact.items.delete",
+    callBuilder:
+      (api: APIType, path: string) =>
+      (id: string): Promise<object> =>
+        api.call(path, { body: { id } }),
+  },
+  setItemsContact: {
+    key: "contact.items.set",
+    callBuilder:
+      (api: APIType, path: string) =>
+      (id: string, fields: GenericObject): Promise<object> =>
+        api.call(path, { body: { id, fields } }),
+  },
 };

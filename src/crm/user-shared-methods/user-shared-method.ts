@@ -1,46 +1,39 @@
-import {
-  APIType,
-  GenericObject,
-  MethodBuilder,
-  MethodsBuilder,
-} from "../../api.types";
+import { APIType, GenericObject, MethodsBuilder } from "../../api.types";
 
-export const USER_SHARED_METHODS: MethodBuilder = (
-  api: APIType
-): MethodsBuilder => ({
+export const USER_SHARED_METHODS: MethodsBuilder = {
   userfieldAdd: {
     key: "userfield.add",
     callBuilder:
-      (path: string) =>
+      (api: APIType, path: string) =>
       (fields: GenericObject): Promise<object> =>
         api.call(path, { body: { fields } }),
   },
   userfieldDelete: {
     key: "userfield.delete",
     callBuilder:
-      (path: string) =>
+      (api: APIType, path: string) =>
       (id: string): Promise<object> =>
         api.call(path, { body: { id } }),
   },
   userfieldGet: {
     key: "userfield.Get",
     callBuilder:
-      (path: string) =>
+      (api: APIType, path: string) =>
       (id: string): Promise<object> =>
         api.call(path, { body: { id } }),
   },
   userfieldList: {
     key: "userfield.list",
     callBuilder:
-      (path: string) =>
+      (api: APIType, path: string) =>
       (order: GenericObject, filter: GenericObject): Promise<object> =>
         api.call(path, { body: { order, filter } }),
   },
   userfieldUpdate: {
     key: "userfield.update",
     callBuilder:
-      (path: string) =>
+      (api: APIType, path: string) =>
       (id: string, fields: GenericObject): Promise<object> =>
         api.call(path, { body: { id, fields } }),
   },
-});
+};

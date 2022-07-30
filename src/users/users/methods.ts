@@ -1,40 +1,19 @@
-import { APIType, MethodBuilder, MethodsBuilder } from "../../api.types";
+import { MethodsBuilder } from "../../api.types";
+import { CRUD_METHODS, CRUD_METHODS_DEF } from "../../api-helpers";
 
-export const CUSTOM_USER_METHODS: MethodBuilder = (
-  api: APIType
-): MethodsBuilder => {
-  const callBuilder =
-    (path: string) =>
-    (...params: any) =>
-      api.call(path, { body: { ...params } });
-
-  return {
-    get: {
-      key: "get",
-      callBuilder,
-    },
-    add: {
-      key: "add",
-      callBuilder,
-    },
-    update: {
-      key: "update",
-      callBuilder,
-    },
-    fields: {
-      key: "fields",
-      callBuilder,
-    },
-    search: {
-      key: "search",
-      callBuilder,
-    },
-    current: {
-      key: "current",
-      callBuilder,
-    },
-  };
+const { add, get, update, fields } = CRUD_METHODS;
+const { noParams, withFieldsParam } = CRUD_METHODS_DEF;
+export const USER_METHODS: MethodsBuilder = {
+  get,
+  add,
+  update,
+  fields,
+  search: {
+    key: "search",
+    callBuilder: withFieldsParam,
+  },
+  current: {
+    key: "current",
+    callBuilder: noParams,
+  },
 };
-
-export const USER_METHODS: MethodBuilder = (api: APIType): MethodsBuilder =>
-  CUSTOM_USER_METHODS(api);

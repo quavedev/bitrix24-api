@@ -1,28 +1,24 @@
 import { CRUD_METHODS } from "../../api-helpers";
-import {
-  APIType,
-  GenericObject,
-  MethodBuilder,
-  MethodsBuilder,
-} from "../../api.types";
+import { APIType, GenericObject, MethodsBuilder } from "../../api.types";
 
-const COMPANY_METHODS = (api: APIType) => ({
+const COMPANY_METHODS: MethodsBuilder = {
   companyAdd: {
     key: "company.add",
     callBuilder:
-      (path: string) =>
+      (api: APIType, path: string) =>
       (id: string, fields: GenericObject): Promise<object> =>
         api.call(path, { body: { id, fields } }),
   },
   companyDelete: {
     key: "company.delete",
     callBuilder:
-      (path: string) =>
+      (api: APIType, path: string) =>
       (id: string, fields: GenericObject): Promise<object> =>
         api.call(path, { body: { id, fields } }),
   },
-});
+};
 
-export const CONTACT_METHODS: MethodBuilder = (
-  api: APIType
-): MethodsBuilder => ({ ...CRUD_METHODS(api), ...COMPANY_METHODS(api) });
+export const CONTACT_METHODS: MethodsBuilder = {
+  ...CRUD_METHODS,
+  ...COMPANY_METHODS,
+};

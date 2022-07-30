@@ -2,56 +2,87 @@ import { API } from "./api";
 import {
   APIType,
   Config,
-  GenericObject,
-  MethodBuilder,
+  CrudListCallProps,
+  CrudUpdateCallProps,
   MethodsBuilder,
+  MethodsDefBuilder,
 } from "./api.types";
 
-export const CRUD_METHODS: MethodBuilder = (api: APIType): MethodsBuilder => {
-  const callBuilder =
-    (path: string) =>
-    (...params: any): Promise<GenericObject> =>
-      api.call(path, { body: { ...params } });
+export const CRUD_METHODS_DEF: MethodsDefBuilder = {
+  add:
+    (api: APIType, path: string) =>
+    (fields: object): Promise<object> =>
+      api.call(path, { body: { fields } }),
+  delete:
+    (api: APIType, path: string) =>
+    (id: string): Promise<object> =>
+      api.call(path, { body: { id } }),
+  fields: (api: APIType, path: string) => (): Promise<object> => api.call(path),
 
-  return {
-    add: {
-      key: "add",
-      callBuilder,
-    },
-    delete: {
-      key: "delete",
-      callBuilder,
-    },
-    fields: {
-      key: "fields",
-      callBuilder,
-    },
-    get: {
-      key: "get",
-      callBuilder,
-    },
-    list: {
-      key: "list",
-      callBuilder,
-    },
-    update: {
-      key: "update",
-      callBuilder,
-    },
-  };
+  get:
+    (api: APIType, path: string) =>
+    (id: string): Promise<object> =>
+      api.call(path, { body: { id } }),
+
+  list:
+    (api: APIType, path: string) =>
+    (options: CrudListCallProps): Promise<object> =>
+      api.call(path, { body: { ...options } }),
+
+  update:
+    (api: APIType, path: string) =>
+    (options: CrudUpdateCallProps): Promise<object> =>
+      api.call(path, { body: { ...options } }),
+  noParams: (api: APIType, path: string) => (): Promise<object> =>
+    api.call(path),
+  withFieldsParam:
+    (api: APIType, path: string) =>
+    (fields: object): Promise<object> =>
+      api.call(path, { body: { fields } }),
+  withIdParam:
+    (api: APIType, path: string) =>
+    (id: string): Promise<object> =>
+      api.call(path, { body: { id } }),
+};
+
+export const CRUD_METHODS: MethodsBuilder = {
+  add: {
+    key: "add",
+    callBuilder: CRUD_METHODS_DEF.add,
+  },
+  delete: {
+    key: "delete",
+    callBuilder: CRUD_METHODS_DEF.delete,
+  },
+  fields: {
+    key: "fields",
+    callBuilder: CRUD_METHODS_DEF.fields,
+  },
+  get: {
+    key: "get",
+    callBuilder: CRUD_METHODS_DEF.get,
+  },
+  list: {
+    key: "list",
+    callBuilder: CRUD_METHODS_DEF.list,
+  },
+  update: {
+    key: "update",
+    callBuilder: CRUD_METHODS_DEF.update,
+  },
 };
 
 export const buildApiMethods: any = (
   config: Config,
   methodPrefix: string,
-  methodBuild: MethodBuilder
+  methodBuild: MethodsBuilder
 ): APIType => {
   const api = new API(config);
-  const entries = Object.entries(methodBuild(api));
+  const entries = Object.entries(methodBuild);
   return entries.reduce(
     (acc, [method, { key, callBuilder }]) => ({
       ...acc,
-      [method]: callBuilder(`${methodPrefix}.${key}`),
+      [method]: callBuilder(api, `${methodPrefix}.${key}`),
     }),
     {} as APIType
   );
