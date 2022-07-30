@@ -1,4 +1,4 @@
-# Bitrix24 API
+# Bitrix24 Api
 
 ### Using GH Packages in projects
 

@@ -1,0 +1,1 @@
+export { DealAPI } from "./deals";
