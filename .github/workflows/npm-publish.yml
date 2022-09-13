@@ -4,6 +4,9 @@
 name: Node.js Package
 
 on:
+  workflow_dispatch:
+    inputs:
+
   release:
     types: [created]
 
@@ -28,6 +31,7 @@ jobs:
           node-version: 16
           registry-url: https://registry.npmjs.org/
       - run: npm ci
-      - run: npm run publish:lib
+      - run: npm run build-test && npm run publish:pre-cp
+#      - run: npm run publish:lib
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
