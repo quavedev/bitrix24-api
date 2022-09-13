@@ -4,6 +4,7 @@
   "description": "An API to work with Bitrix24",
   "main": "./index.js",
   "types": "./types/index.d.ts",
+  "private": false,
   "scripts": {
     "build": "npm run build:clean && npm run build:cjs && npm run build:types",
     "test": "jest",
@@ -12,7 +13,7 @@
     "build:cjs": "npm run build:clean && tsc -p config/tsconfig.cjs.json",
     "build:types": "rm -rf dist/types && tsc -p config/tsconfig.types.json",
     "publish:pre-cp": "cp package.json README.md ./dist/",
-    "publish:lib": "npm run build-test && npm run publish:pre-cp && npm publish ./dist",
+    "publish:lib": "npm run build-test && npm run publish:pre-cp && npm publish --access public ./dist",
     "postpub": "ls ./dist"
   },
   "author": "Fernando Lima",
