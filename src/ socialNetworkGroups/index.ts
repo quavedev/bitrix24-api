@@ -1,0 +1,1 @@
+export { SocialNetworkGroupsAPI } from "./socialNetworkGroups";
