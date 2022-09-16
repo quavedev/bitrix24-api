@@ -15,6 +15,7 @@ export const remoteCall = (
   return axios({
     url: endpointWithPath,
     method: method,
+
     ...(body ? { data: JSON.stringify(body) } : {}),
     headers,
   });
