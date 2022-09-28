@@ -5,12 +5,11 @@ type Obj<T = any> = {
 declare enum RestMethodsEnum {
   GET = "GET",
   POST = "POST",
-  DELETE ="DELETE",
+  DELETE = "DELETE",
   PUT = "PUT",
-  PATCH ="PATCH",
-  OPTIONS ="OPTIONS"
+  PATCH = "PATCH",
+  OPTIONS = "OPTIONS",
 }
-
 
 interface APIConstructor {
   endpoint: string;
@@ -19,13 +18,12 @@ interface APIConstructor {
 
 interface CallParams {
   body: Obj;
-  headers?: Obj<string>
-  method?: RestMethodsEnum
+  headers?: Obj<string>;
+  method?: RestMethodsEnum;
 }
 
 export declare class API {
   constructor(params: APIConstructor);
 
-  call(param: CallParams): any
+  call(param: CallParams): any;
 }
-
