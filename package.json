@@ -6,15 +6,15 @@
   "types": "./types/index.d.ts",
   "private": false,
   "scripts": {
-    "build": "npm run build:clean && npm run build:cjs && npm run build:types",
+    "build": "npm run build:clean && npm run build:cjs && npm run build:types && npm run build:pre-cp",
     "test": "jest",
     "prettier": "prettier --write src/*.ts",
     "build-test": "npm run build && npm run test",
     "build:clean": "rm -rf dist",
     "build:cjs": "npm run build:clean && tsc -p config/tsconfig.cjs.json",
     "build:types": "rm -rf dist/types && tsc -p config/tsconfig.types.json",
-    "publish:pre-cp": "cp package.json README.md ./dist/",
-    "publish:lib": "npm run build-test && npm run publish:pre-cp && npm publish --access public ./dist",
+    "build:pre-cp": "cp package.json README.md ./dist/",
+    "publish:lib": "npm run build-test && npm publish --access public ./dist",
     "postpub": "ls ./dist"
   },
   "author": "Fernando Lima",

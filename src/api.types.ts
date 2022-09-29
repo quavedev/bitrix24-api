@@ -1,5 +1,6 @@
 export interface Config {
   endpoint: string;
+  authCode?: string;
   type?: "json" | "xml" | string;
 }
 
