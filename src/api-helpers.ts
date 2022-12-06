@@ -24,6 +24,11 @@ export const CRUD_METHODS_DEF: MethodsDefBuilder = {
     (id: string): Promise<object> =>
       api.call(path, { body: { id } }),
 
+  getWithBodyParams:
+    (api: APIType, path: string) =>
+    (params: object): Promise<object> =>
+      api.call(path, { body: { ...params } }),
+
   list:
     (api: APIType, path: string) =>
     (options: CrudListCallProps): Promise<object> =>
@@ -61,6 +66,10 @@ export const CRUD_METHODS: MethodsBuilder = {
   get: {
     key: "get",
     callBuilder: CRUD_METHODS_DEF.get,
+  },
+  getWithBodyParams: {
+    key: "get",
+    callBuilder: CRUD_METHODS_DEF.getWithBodyParams,
   },
   list: {
     key: "list",
